@@ -1,0 +1,21 @@
+<h1>New Entry</h1>
+<%= form_with(model: @entry) do |form| %>
+    <div>
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+    </div>
+    <div>
+        <%= form.label :item_category %>
+        <%= form.text_field :item_category %>
+    </div>
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>
+
+<br>
+
+<div>
+ <%= link_to "Back to home", root_path %>
+</div>
+
