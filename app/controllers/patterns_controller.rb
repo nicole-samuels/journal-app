@@ -1,5 +1,6 @@
 class PatternsController < ApplicationController
 
+    # GET
     def index
         @patterns = Pattern.all
     end 
@@ -8,6 +9,7 @@ class PatternsController < ApplicationController
         @pattern = Pattern.new()
     end
 
+    # POST
     def create
         @pattern = Pattern.new(pattern_params)
         if @pattern.save
@@ -18,6 +20,7 @@ class PatternsController < ApplicationController
         end
     end
 
+    # DELETE
     def destroy
        Pattern.find(params[:id]).destroy
        redirect_to root_url
@@ -26,7 +29,7 @@ class PatternsController < ApplicationController
     private
 
     def pattern_params
-        params.require(:pattern).permit(:pattern_name, :description, :item_category, :level)
+        params.require(:pattern).permit(:pattern_name, :description, :item_category, :level, :pattern_pdf)
     end
 
 end

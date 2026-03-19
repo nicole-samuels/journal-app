@@ -1,29 +1,46 @@
-<h1>New Pattern</h1>
-<%= form_with(model: @pattern) do |form| %>
-    <div>
-        <%= form.label :pattern_name, "Pattern Name", style: "display: block" %>
-        <%= form.text_field :pattern_name%>
+<div class="container-fluid mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+<h1 class="mb-4">New Pattern</h1>
+<%= form_with(model: @pattern, class: "shadow-sm p-4 border rounded bg-light") do |form| %>
+    <div class="mb-3">
+        <%= form.label :pattern_name, "Pattern Name", style: "display: block", class:"form-label fw-bold" %>
+        <%= form.text_field :pattern_name, class:"form-control"%>
     </div>
-    <div>
-        <%= form.label :description, style: "display: block"%>
-        <%= form.text_field :description %>
+
+    <div class="mb-3">
+        <%= form.label :description, style: "display: block", class:"form-label fw-bold"%>
+        <%= form.text_field :description, class:"form-control", placeholder:"Pattern description" %>
     </div>
-    <div>
-        <%= form.label :item_category, "Item Category", style: "display: block"%>
-        <%= form.text_field :item_category %>
+
+    <div class="mb-3">
+        <%= form.label :item_category, "Item Category", style: "display: block", class:"form-label fw-bold"%>
+        <%= form.text_field :item_category, class:"form-control", placeholder: "e.g. Hat, Scarf, Jumper" %>
     </div>
-    <div>
-        <%= form.label :level, style: "display: block"%>
+
+    <fieldset class="mb-4">
+    <legend class="form-label fw-bold h6">Difficulty Level</legend>
+    <div class="d-flex flex-wrap gap-3">
         <% Pattern.levels.keys.each do |level|%>
-            <div>
-                <%= form.radio_button :level, level%>
-                <%= form.label "level_#{level}", level.humanize %>
+            <div class="form-check">
+                <%= form.radio_button :level, level, class: "form-check-input"%>
+                <%= form.label "level_#{level}", level.humanize, class: "form-check-label" %>
             </div>
         <% end %>
     </div>
+    </fieldset>
 
-    <div>
-        <%= form.submit %>
+    <div class="mb-4">
+        <%= form.label :pattern_pdf, "Pattern PDF Upload", class:"form-label fw-bold", id:"formFile"%> 
+        <br>
+        <div class="form-text">Only PDF files are accepted.</div>
+        <%= form.file_field :pattern_pdf, class:"form-control", accept: "application/pdf"%> 
+    </div>
+    <br>
+
+    <div class="d-grid gap-2">
+        <%= form.submit class:"btn btn-secondary btn-lg" %>
     </div>
 <% end %>
 
@@ -31,4 +48,8 @@
 
 <div>
  <%= link_to "Back to home", root_path %>
+</div>
+
+</div>
+  </div>
 </div>

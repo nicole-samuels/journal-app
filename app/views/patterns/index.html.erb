@@ -1,8 +1,19 @@
 <h1>All Patterns</h1>
 <div>
  <% @patterns.each do |pattern| %>
-   <%= pattern.name %>
+   <%= pattern.pattern_name %>
+   <%= pattern.description.humanize%>
    <%= pattern.item_category%>
+   <%= pattern.level.humanize%>
+   <% if pattern.pattern_pdf.attached? && pattern.pattern_pdf.previewable? %>
+      <div class="pdf-preview-box">
+        <%= image_tag pattern.pattern_pdf.preview(resize_to_limit: [300, 300]).processed, 
+            class: "pdf-thumbnail" %>
+      </div>
+      <%= link_to "View PDF", url_for(pattern.pattern_pdf), target: "_blank" %>
+   <% else %>
+   <span>No PDF</span>
+<% end %>
    <%= button_to "Delete", pattern, method: :delete, data: { confirm: "Are you sure you want to delete this Pattern ?"} %>
  <% end %>
 </div>

@@ -22,6 +22,10 @@ gem "jbuilder"
 # enable sassc
 gem 'sassc-rails'
 
+gem 'docsplit'
+gem "mini_magick", "~> 4.12" # Required for GraphicsMagick
+gem "image_processing", "~> 1.2"
+
 # bootstrap
 gem 'bootstrap', '~> 5.3.8'
 
