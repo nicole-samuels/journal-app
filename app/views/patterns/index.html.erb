@@ -1,0 +1,8 @@
+<h1>All Patterns</h1>
+<div>
+ <% @patterns.each do |pattern| %>
+   <%= pattern.name %>
+   <%= pattern.item_category%>
+   <%= button_to "Delete", pattern, method: :delete, data: { confirm: "Are you sure you want to delete this Pattern ?"} %>
+ <% end %>
+</div>

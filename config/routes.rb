@@ -14,6 +14,6 @@ Rails.application.routes.draw do
 end
 
 Rails.application.routes.draw do
- root 'entries#index'
- resources :entries, only: [:create, :new, :destroy]
+ root 'patterns#index'
+ resources :patterns, only: [:create, :new, :destroy]
 end

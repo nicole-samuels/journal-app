@@ -1,0 +1,34 @@
+<h1>New Pattern</h1>
+<%= form_with(model: @pattern) do |form| %>
+    <div>
+        <%= form.label :pattern_name, "Pattern Name", style: "display: block" %>
+        <%= form.text_field :pattern_name%>
+    </div>
+    <div>
+        <%= form.label :description, style: "display: block"%>
+        <%= form.text_field :description %>
+    </div>
+    <div>
+        <%= form.label :item_category, "Item Category", style: "display: block"%>
+        <%= form.text_field :item_category %>
+    </div>
+    <div>
+        <%= form.label :level, style: "display: block"%>
+        <% Pattern.levels.keys.each do |level|%>
+            <div>
+                <%= form.radio_button :level, level%>
+                <%= form.label "level_#{level}", level.humanize %>
+            </div>
+        <% end %>
+    </div>
+
+    <div>
+        <%= form.submit %>
+    </div>
+<% end %>
+
+<br>
+
+<div>
+ <%= link_to "Back to home", root_path %>
+</div>
