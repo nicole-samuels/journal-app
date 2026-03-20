@@ -1,9 +1,9 @@
- <div>
-   <%= link_to "Ruby learning journal", root_path %>
+ <nav class="navbar navbar-expand navbar-light bg-light border-bottom shadow-sm py-2">
+ <div class="container-fluid">
+   <%= link_to "My Knitting journal", root_path, class: "navbar-brand fw-bold me-4" %>
 
-   <div class="navbar-link">
-     <%= link_to "New Pattern", new_pattern_path %>
+   <div class="navbar-nav">
+     <%= link_to "New Pattern", new_pattern_path, class:"nav-link text-primary fw-semibold"%>
    </div>
-
- </div>
 </div>
+</nav>

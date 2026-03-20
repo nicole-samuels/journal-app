@@ -1,0 +1,56 @@
+
+
+
+<div class="container my-5">
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "All Patterns", patterns_path %></li>
+      <li class="breadcrumb-item active"><%= @pattern.pattern_name %></li>
+    </ol>
+  </nav>
+  <div class="row g-5">
+    <div class="col-md-6">
+      <div class="card shadow-sm border-4 p-2">
+        <% if @pattern.pattern_pdf.attached? && @pattern.pattern_pdf.previewable? %>
+          <%= image_tag @pattern.pattern_pdf.preview(resize_to_limit: [800, 800]).processed, 
+              class: "img-fluid rounded w-100", 
+              alt: @pattern.pattern_name %>
+        <% else %>
+          <div class="bg-light text-center py-5 rounded h-100 d-flex align-items-center justify-content-center">
+            <span class="text-muted">No Preview Available</span>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="ps-md-4">
+        <h1 class="display-5 fw-bold mb-3"><%= @pattern.pattern_name %></h1>
+        
+        <hr class="my-4">
+
+        <div class="mb-4">
+          <h5 class="text-uppercase text-muted small fw-bold">Pattern Details</h5>
+          <p class="mb-1"><strong>Category:</strong> <%= @pattern.item_category %></p>
+          <p><strong>Difficulty Level:</strong> <span class="badge text-bg-secondary text-lg"><%= @pattern.level.humanize %></span></p>
+        </div>
+        <div class="d-grid gap-3 d-md-flex justify-content-md-start pt-3">
+          <%= link_to edit_pattern_path(@pattern), class: "btn btn-outline-dark px-4" do %>
+            <i class="bi bi-pencil"></i> Edit Pattern
+          <% end %>
+
+          <% if @pattern.pattern_pdf.attached? %>
+            <%= link_to url_for(@pattern.pattern_pdf), class: "btn btn-primary px-4", target: "_blank" do %>
+              View Full PDF
+            <% end %>
+          <% end %>
+          
+          <%= button_to "Delete", @pattern, 
+              method: :delete, 
+              class: "btn btn-danger",
+              data: { confirm: "Are you sure?" } %>
+        </div>
+        </div>
+    </div>
+    
+  </div>
+</div>

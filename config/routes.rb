@@ -15,5 +15,5 @@ end
 
 Rails.application.routes.draw do
  root 'patterns#index'
- resources :patterns, only: [:create, :new, :destroy]
+ resources :patterns, only: [:create, :new, :destroy, :show, :edit, :update]
 end
