@@ -1,5 +1,5 @@
 class PatternsController < ApplicationController
-
+   
     # GET /patterns
     def index
         @patterns = Pattern.all
@@ -22,7 +22,7 @@ class PatternsController < ApplicationController
             redirect_to root_url, 
             notice: 'Pattern was successfully created.'
         else
-            render :new
+            render :new, status: :unprocessable_entity
         end
     end
 

@@ -25,9 +25,12 @@ gem 'sassc-rails'
 gem 'docsplit'
 gem "mini_magick", "~> 4.12" # Required for GraphicsMagick
 gem "image_processing", "~> 1.2"
+gem 'active_storage_validations'
 
 # bootstrap
 gem 'bootstrap', '~> 5.3.8'
+
+# gem "simple_form", "~> 3.5"
 
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

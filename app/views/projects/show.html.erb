@@ -1,0 +1,53 @@
+<div class="container my-5">
+  <nav aria-label="breadcrumb" class="mb-4">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><%= link_to "All Patterns", patterns_path %></li>
+      <li class="breadcrumb-item"><%= link_to @pattern.pattern_name, pattern_path(@pattern) %></li>
+      <li class="breadcrumb-item active"><%= "Project ##{@project.id}" %></li>
+    </ol>
+  </nav>
+
+  <h1 class="display-5 fw-bold mb-4">
+    <%= "#{@pattern.pattern_name} | Project ##{@project.id}" %>
+  </h1>
+
+  <div class="row">
+    <div class="col-md-4">
+      <p class="text-muted border-bottom pb-2">Project Details</p>
+      <p><strong>Status:</strong> <%= @project.status&.humanize || "Not Specified" %></p>
+      <p><strong>Total Cost:</strong> <%= number_to_currency(@project.total_price, unit: "£") %></p>
+      <p><strong>Started:</strong> <%= @project.start_date || "--" %></p>
+      <p><strong>Finished:</strong> <%= @project.finish_date || "--" %></p>
+    </div>
+    
+    <div class="col-md-4">
+      <p class="text-muted border-bottom pb-2">Specs</p>
+      <p><strong>Yarn:</strong> <%= @project.yarn_used %> (<%= @project.yarn_weight %>)</p>
+      <p><strong>Price/Skein:</strong> <%= number_to_currency(@project.yarn_price, unit: "£") %></p>
+      <p><strong>Quantity:</strong> <%= @project.yarn_quantity %></p>
+      <p><strong>Needle Size:</strong> <%= @project.needle_size %></p>
+      <p><strong>Size:</strong> <%= @project.garment_size %></p>
+      <p><strong>Purchase Link:</strong> 
+        <% if @project.purchase_link.present? %>
+            <%= link_to "Buy Yarn", @project.purchase_link, target: "_blank" %>
+        <% end %>
+      </p>
+
+      
+    </div>
+
+    <div class="col-md-4">
+      <p class="text-muted border-bottom pb-2">Review & Feedback</p>
+      <p><strong>Difficulty:</strong> <%= @project.project_difficulty_review || 0 %>/5</p>
+      <p><strong>Softness:</strong> <%= @project.yarn_softness_review || 0 %>/5</p>
+      <p><strong>Clarity:</strong> <%= @project.pattern_clarity_review || 0 %>/5</p>
+      <p><strong>Average Score:</strong> <%= @project.average_review.round(1) %></p>
+      
+      <div class="mt-3 p-2 bg-light rounded">
+        <strong>Comment:</strong>
+        <p class="mb-0 italic"><%= @project.comment.presence || "No comments yet." %></p>
+      </div>
+    </div>
+  </div>
+  <%= link_to "Edit Project", edit_pattern_project_path(@pattern, @project), class: "btn btn-sm btn-light border" %>
+</div>

@@ -1,0 +1,134 @@
+<div class="container-fluid mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+
+<h1 class="mb-4">New Project</h1>
+<%= form_with(model: [@pattern, @project] , class: "shadow-sm p-4 border rounded bg-light") do |form| %> 
+        <% if @project.errors.any? %>
+          <div class="errors" role="alert">
+            <h5><%= pluralize(@project.errors.count, "error") %> stopped this project from saving:</h5>
+            <ul class="mb-0">
+              <% @project.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+    
+    <div class="mb-3">
+        <div class="d-flex flex-wrap gap-3">
+            <%= form.label :status, "Status", style: "display: block", class:"form-label fw-bold" %>
+            <%= form.select :status,
+            Project.statuses.keys.map { |s| [s.humanize, s]},
+            {include_blank: "Select Status"},
+            {class:"form-select", required:"true"} %>
+        </div>
+    </div>
+
+        <div class="mb-3">
+        <%= form.label :start_date, "Start Date", style: "display: block", class:"form-label fw-bold"%>
+        <%= form.text_field :start_date, type: "date", class:"form-control" %>
+
+    </div>
+        <div class="mb-3">
+        <%= form.label :finish_date, "Finish Date", style: "display: block", class:"form-label fw-bold"%>
+        <%= form.text_field :finish_date, type: "date", class:"form-control"%>
+    </div>
+
+    <fieldset class="border p-4 rounded bg-light mb-4">
+        <legend class="float-none w-auto fw-bold h5">
+            Yarn & Materials
+        </legend>
+
+        <div class="mb-3">
+            <%= form.label :yarn_used, "Yarn Used", style: "display: block", class:"form-label fw-bold"%>
+            <%= form.text_field :yarn_used, class:"form-control", placeholder:"Yarn Brand Name", required:"true" %>
+        </div>
+
+        <div class="mb-3">
+            <div class="d-flex flex-wrap gap-3">
+                <%= form.label :yarn_weight, "Yarn Weight", style: "display: block", class:"form-label fw-bold" %>
+                <%= form.select :yarn_weight,
+                Project.yarn_weights.map { |key, description| [description, key]},
+                {include_blank: "Select Yarn Weight"},
+                {class:"form-select", required:"true"} %>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <%= form.label :yarn_price, "Yarn Price in GBP", style: "display: block", class:"form-label fw-bold"%>
+            <%= form.text_field :yarn_price, class:"form-control", placeholder: "Yarn Price", required:"true" %>
+        </div>
+
+        <div class="mb-3">
+            <%= form.label :yarn_quantity, "Yarn Quantity", style: "display: block", class:"form-label fw-bold"%>
+            <%= form.text_field :yarn_quantity, class:"form-control", placeholder: "Yarn Price", required:"true" %>
+        </div>
+
+
+        <div class="mb-3">
+            <%= form.label :purchase_link, "Yarn Purchase Link", style: "display: block", class:"form-label fw-bold"%>
+            <%= form.text_field :purchase_link, class:"form-control", required:"true" %>
+        </div>
+
+        <div class="mb-3">
+            <%= form.label :needle_size, "Needle Size", style: "display: block", class:"form-label fw-bold"%>
+            <%= form.text_field :needle_size, class:"form-control", placeholder: "Select Option", required:"true" %>
+        </div>
+        
+    </fieldset>
+
+    <div class="mb-3">
+        <%= form.label :garment_size, "Garment Size", style: "display: block", class:"form-label fw-bold"%>
+        <%= form.text_field :garment_size, class:"form-control", placeholder: "Select Option", required:"true" %>
+    </div>
+
+    <fieldset class="border p-4 rounded bg-light mb-4">
+        <legend class="float-none w-auto fw-bold h5">
+            Review
+        </legend>
+
+        <div class="mb-3"> 
+            <%= form.label "Pattern clarity (1-5)", style: "display: block", class:"form-label fw-bold"%>
+            <%= form.number_field :pattern_clarity_review, in: 1..5, class:"form-control" %>
+        </div>
+
+        <div class="mb-3">
+            <%= form.label "Project Difficulty (1-5)", style: "display: block", class:"form-label fw-bold"%>
+            <%= form.number_field :project_difficulty_review, in: 1..5, class:"form-control" %>
+        </div>
+
+        <div class="mb-3">
+            <%= form.label "Yarn softness (1-5)", style: "display: block", class:"form-label fw-bold"%>  
+            <%= form.number_field :yarn_softness_review, in: 1..5, class:"form-control" %>        
+        </div>
+
+        <div class="mb-3">
+            <%= form.label "Comments", style: "display: block", class:"form-label fw-bold"%>
+            <%= form.text_field :comment, class:"form-control" %>
+        </div>
+        
+    </fieldset>
+    <br>
+
+    <div class="d-grid gap-2">
+        <%= form.submit "Create Project", class:"btn btn-secondary btn-lg"%>
+    </div>
+<% end %>
+
+<br>
+
+<div>
+ <%= link_to "Back to home", root_path, class:"text-primary fw-semibold" %>
+</div>
+
+</div>
+  </div>
+</div>
+
+<script>
+$('#rating-form').raty({
+path: '/assets/',
+scoreName: 'project[pattern_clarity_review]'
+});
+</script>

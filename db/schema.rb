@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2026_03_19_141103) do
+ActiveRecord::Schema[7.2].define(version: 2026_03_24_095404) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,26 @@ ActiveRecord::Schema[7.2].define(version: 2026_03_19_141103) do
     t.string "item_category", null: false
     t.string "description", null: false
     t.string "level", null: false
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string "status"
+    t.string "yarn_used"
+    t.string "yarn_weight"
+    t.decimal "yarn_price"
+    t.string "purchase_link"
+    t.integer "yarn_quantity"
+    t.string "needle_size"
+    t.string "garment_size"
+    t.date "start_date"
+    t.date "finish_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "pattern_id"
+    t.integer "project_difficulty_review"
+    t.integer "yarn_softness_review"
+    t.integer "pattern_clarity_review"
+    t.string "comment"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"

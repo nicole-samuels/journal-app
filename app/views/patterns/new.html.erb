@@ -1,8 +1,11 @@
 <div class="container-fluid mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
-
+<header>
 <h1 class="mb-4">New Pattern</h1>
+</header>
+
+<main>
 <%= form_with(model: @pattern, class: "shadow-sm p-4 border rounded bg-light") do |form| %> 
         <% if @pattern.errors.any? %>
           <div class="errors" role="alert">
@@ -15,19 +18,43 @@
           </div>
         <% end %>
     
+    <% invalid = @pattern.errors.include?(:pattern_name) %>
     <div class="mb-3">
         <%= form.label :pattern_name, "Pattern Name", style: "display: block", class:"form-label fw-bold" %>
-        <%= form.text_field :pattern_name, class:"form-control", required:"true"%>
+        <%= form.text_field :pattern_name, class:"form-control #{'is-invalid' if invalid}"%>
+        <% if invalid %>
+            <div class="invalid-feedback d-block">
+                <% @pattern.errors.full_messages_for(:pattern_name).each do |error_message| %>
+                    <%= error_message %>.
+                <% end %>
+            </div>
+        <% end %>
     </div>
-
+    
+     <% invalid = @pattern.errors.include?(:description) %>
     <div class="mb-3">
         <%= form.label :description, style: "display: block", class:"form-label fw-bold"%>
-        <%= form.text_field :description, class:"form-control", placeholder:"Pattern description", required:"true" %>
+        <%= form.text_field :description, class:"form-control #{'is-invalid' if invalid}", placeholder:"Pattern description" %>
+        <% if invalid %>
+            <div class="invalid-feedback d-block">
+                <% @pattern.errors.full_messages_for(:description).each do |error_message| %>
+                    <%= error_message %>.
+                <% end %>
+            </div>
+        <% end %>
     </div>
 
+    <% invalid = @pattern.errors.include?(:item_category) %>
     <div class="mb-3">
         <%= form.label :item_category, "Item Category", style: "display: block", class:"form-label fw-bold"%>
-        <%= form.text_field :item_category, class:"form-control", placeholder: "e.g. Hat, Scarf, Jumper", required:"true" %>
+        <%= form.text_field :item_category, class:"form-control #{'is-invalid' if invalid}", placeholder: "e.g. Hat, Scarf, Jumper" %>
+        <% if invalid %>
+            <div class="invalid-feedback d-block">
+                <% @pattern.errors.full_messages_for(:item_category).each do |error_message| %>
+                    <%= error_message %>.
+                <% end %>
+            </div>
+        <% end %>
     </div>
 
     <fieldset class="mb-4">
@@ -45,7 +72,6 @@
     <div class="mb-4">
         <%= form.label :pattern_pdf, "Pattern PDF Upload", class:"form-label fw-bold", id:"formFile"%> 
         <br>
-        <%= form.label :pattern_pdf, "Only PDF files are accepted",class:"form-text"%>
         <%= form.file_field :pattern_pdf, class:"form-control", accept: "application/pdf"%> 
     </div>
     <br>
@@ -64,3 +90,4 @@
 </div>
   </div>
 </div>
+</main>
