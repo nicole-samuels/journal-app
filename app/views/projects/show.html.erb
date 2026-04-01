@@ -1,14 +1,15 @@
+<%attempt_number = @pattern.projects.order(:created_at).find_index(@project) + 1 %>
 <div class="container my-5">
   <nav aria-label="breadcrumb" class="mb-4">
     <ol class="breadcrumb">
       <li class="breadcrumb-item"><%= link_to "All Patterns", patterns_path %></li>
       <li class="breadcrumb-item"><%= link_to @pattern.pattern_name, pattern_path(@pattern) %></li>
-      <li class="breadcrumb-item active"><%= "Project ##{@project.id}" %></li>
+      <li class="breadcrumb-item active"><%= "Project ##{attempt_number}" %></li>
     </ol>
   </nav>
 
   <h1 class="display-5 fw-bold mb-4">
-    <%= "#{@pattern.pattern_name} | Project ##{@project.id}" %>
+    <%= "#{@pattern.pattern_name} | Project ##{attempt_number}" %>
   </h1>
 
   <div class="row">
@@ -49,5 +50,41 @@
       </div>
     </div>
   </div>
-  <%= link_to "Edit Project", edit_pattern_project_path(@pattern, @project), class: "btn btn-sm btn-light border" %>
+
+  <div class="mt-5 pt-4 border-top">
+  <h3 class="mb-4">Project Gallery</h3>
+
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+    <% if @project.photo.attached? %>
+      <% @project.photo.each do |photo| %>
+        <div class="col">
+            <div class="ratio ratio-4x3">
+              <%= image_tag photo, class: "card-img-top object-fit-cover rounded-top" %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% else %>
+      <div class="col-12">
+        <div class="p-5 bg-light border rounded text-center text-muted">
+          <p>No photos yet! Click Edit to add some progress shots.</p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <br>
+  <div class="d-flex align-items-center gap-3 mt-5 pt-3">
+    <%= link_to edit_pattern_project_path(@pattern, @project), class: "btn btn-outline-secondary d-flex align-items-center px-4" do %>
+      Edit Project
+    <% end %>
+
+    <%= button_to [@pattern, @project], 
+                method: :delete, 
+                class: "btn btn-outline-danger px-4",
+                data: { turbo_confirm: "Are you sure you want to delete this project?" } do %>
+      Delete Project
+    <% end %>
+  </div>
+
 </div>
+  

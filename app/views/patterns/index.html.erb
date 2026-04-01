@@ -1,10 +1,58 @@
 <header>
 <br>
-<h1 class="display-5 text-center my-6 fw-bold mb-3">All Patterns</h1>
+<h1 class="display-5 text-center my-6 fw-bold mb-3">Knitting Journal</h1>
 <br>
 </header>
 <br>
 <main>
+<% if @active_projects.any? %>
+  <div class="container mb-5">
+    <h2 class="mb-3"> Current WIP </h2>
+    
+    <div class="row">
+      <% @active_projects.each do |project| %>
+        <div class="col-12 mb-3">
+          <div class="card shadow-sm border">
+            <div class="card-body d-flex justify-content-between align-items-center">
+              <div>
+              <% attempt_number = project.pattern.projects.order(:created_at).find_index(project).to_i + 1 %>
+                <h5 class="card-title mb-1">Project <%= attempt_number %></h5>
+                <p class="card-text text-muted mb-0">
+                  Pattern: <%= project.pattern&.pattern_name || "Unknown Pattern" %> | 
+                  Started: <%= project.start_date.strftime("%B %d") %>
+                </p>
+              </div>
+              
+              <div class="text-end">
+                <%= link_to "Update Progress", edit_pattern_project_path(project.pattern, project), class: "btn btn-outline-primary btn-sm" %>
+                <%= link_to "View", pattern_project_path(project.pattern, project), class: "btn btn-primary btn-sm" %>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+  <hr>
+<% end %>
+<div class="container">
+<h2 class="mb-3"> All Patterns </h2>
+  <div class="mb-4">
+      <%= form_with url: patterns_path, method: :get,
+          data: { 
+            controller: "search",
+            action: "input->search#submitForm",
+            turbo_frame: "patterns_list" 
+          } do |f| %>
+        
+        <%= f.label :query, "Search for Patterns", class: "form-label fw-bold" %>
+        <%= f.text_field :query, 
+            value: params[:query],
+            placeholder: "Search pattern by name", 
+            class: "form-control" %>
+      <% end %>
+    </div>
+
 <div class="container">
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
   <% @patterns.each do |pattern| %>

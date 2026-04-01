@@ -58,6 +58,10 @@ end
     assert pattern.valid?, "Pattern should be valid with a pdf file"
   end
   
+
+  
+
+
   # test "the truth" do
   #   assert true
   # end

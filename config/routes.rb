@@ -17,7 +17,14 @@ Rails.application.routes.draw do
   root 'patterns#index'
 #  resources :patterns, only: [:create, :new, :destroy, :show, :edit, :update]
 
-  resources :patterns do
-  resources :projects
+resources :patterns do
+    # 1. Collection routes (No ID needed)
+    collection do
+      get :search
+      post :import
+    end
+
+    # 2. Nested routes (Requires a pattern ID)
+    resources :projects
   end
 end

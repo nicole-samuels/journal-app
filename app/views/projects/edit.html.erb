@@ -1,8 +1,8 @@
 <div class="container-fluid mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8 col-lg-6">
-
-<h1 class="mb-4">Edit Project <%=@project.id%></h1>
+<%attempt_number = @pattern.projects.order(:created_at).find_index(@project) + 1 %>
+<h1 class="mb-4">Edit Project <%=attempt_number%></h1>
 <%= form_with(model: [@pattern, @project] , class: "shadow-sm p-4 border rounded bg-light") do |form| %> 
         <% if @project.errors.any? %>
           <div class="errors" role="alert">
@@ -34,6 +34,11 @@
         <%= form.label :finish_date, "Finish Date", style: "display: block", class:"form-label fw-bold"%>
         <%= form.text_field :finish_date, type: "date", class:"form-control"%>
     </div>
+
+    <div class="mb-3">
+        <%= form.label :photo, "Upload A Project Photo", class: "form-label fw-bold" %>
+        <%= form.file_field :photo, multiple: true, class: "form-control" %>
+    </div
 
     <fieldset class="border p-4 rounded bg-light mb-4">
         <legend class="float-none w-auto fw-bold h5">
@@ -72,8 +77,13 @@
         </div>
 
         <div class="mb-3">
-            <%= form.label :needle_size, "Needle Size", style: "display: block", class:"form-label fw-bold"%>
-            <%= form.text_field :needle_size, class:"form-control", placeholder: "Select Option", required:"true" %>
+            <div class="d-flex flex-wrap gap-3">
+                <%= form.label :needle_size, "Needle Size", style: "display: block", class:"form-label fw-bold" %>
+                <%= form.select :needle_size,
+                Project.needle_sizes.map { |key, description| [description, key]},
+                {include_blank: "Select Needle Size"},
+                {class:"form-select", required:"true"} %>
+            </div>
         </div>
         
     </fieldset>

@@ -1,6 +1,3 @@
-
-
-
 <div class="container my-5">
   <nav aria-label="breadcrumb" class="mb-4">
     <ol class="breadcrumb">
@@ -52,7 +49,6 @@
         </div>
     </div>
 
-    <!-- Add new project Attempts here --!>
 <div class="mt-5 border-top pt-4">
   <div class="d-flex justify-content-between align-items-center mb-4">
     <h4 class="display-7 fw-bold mb-0">My Project Attempts</h4>
@@ -76,9 +72,9 @@
           </tr>
         </thead>
         <tbody>
-          <% @pattern.projects.each do |project| %>
+          <% @pattern.projects.order(:created_at).each_with_index do |project, index| %>
             <tr class="text-center">
-              <td><%= project.id %></td>
+              <td class="fw-bold">#<%= index + 1 %></td>
               <td><%= Project.statuses[project.status] %></td>
               <td><%= project.yarn_used %></td>
               <td><%= Project.yarn_weights[project.yarn_weight] %></td>

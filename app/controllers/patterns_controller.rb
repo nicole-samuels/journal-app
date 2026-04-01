@@ -3,6 +3,7 @@ class PatternsController < ApplicationController
     # GET /patterns
     def index
         @patterns = Pattern.all
+        @active_projects = Project.active
     end 
 
     # GET /pattern

@@ -25,14 +25,19 @@
         </div>
     </div>
 
-        <div class="mb-3">
+    <div class="mb-3">
         <%= form.label :start_date, "Start Date", style: "display: block", class:"form-label fw-bold"%>
         <%= form.text_field :start_date, type: "date", class:"form-control" %>
-
     </div>
-        <div class="mb-3">
+
+    <div class="mb-3">
         <%= form.label :finish_date, "Finish Date", style: "display: block", class:"form-label fw-bold"%>
         <%= form.text_field :finish_date, type: "date", class:"form-control"%>
+    </div>
+
+    <div class="mb-3">
+        <%= form.label :photo, "Upload A Project Photo", class: "form-label fw-bold" %>
+        <%= form.file_field :photo, multiple: true, class: "form-control" %>
     </div>
 
     <fieldset class="border p-4 rounded bg-light mb-4">
@@ -62,7 +67,7 @@
 
         <div class="mb-3">
             <%= form.label :yarn_quantity, "Yarn Quantity", style: "display: block", class:"form-label fw-bold"%>
-            <%= form.text_field :yarn_quantity, class:"form-control", placeholder: "Yarn Price", required:"true" %>
+            <%= form.text_field :yarn_quantity, class:"form-control", placeholder: "Yarn Quantity", required:"true" %>
         </div>
 
 
@@ -72,8 +77,13 @@
         </div>
 
         <div class="mb-3">
-            <%= form.label :needle_size, "Needle Size", style: "display: block", class:"form-label fw-bold"%>
-            <%= form.text_field :needle_size, class:"form-control", placeholder: "Select Option", required:"true" %>
+            <div class="d-flex flex-wrap gap-3">
+                <%= form.label :needle_size, "Needle Size", style: "display: block", class:"form-label fw-bold" %>
+                <%= form.select :needle_size,
+                Project.needle_sizes.map { |key, description| [description, key]},
+                {include_blank: "Select Needle Size"},
+                {class:"form-select", required:"true"} %>
+            </div>
         </div>
         
     </fieldset>
