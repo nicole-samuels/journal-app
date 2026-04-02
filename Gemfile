@@ -23,7 +23,7 @@ gem "jbuilder"
 gem 'sassc-rails'
 
 gem 'docsplit'
-gem "mini_magick", "~> 4.12" # Required for GraphicsMagick
+gem "mini_magick", "~> 4.12" 
 gem "image_processing", "~> 1.2"
 gem 'active_storage_validations'
 

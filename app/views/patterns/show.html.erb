@@ -27,6 +27,7 @@
 
         <div class="mb-4">
           <h5 class="text-uppercase text-muted small fw-bold">Pattern Details</h5>
+          <p class="mb-1"><strong>Description:</strong> <%= @pattern.description %></p>
           <p class="mb-1"><strong>Category:</strong> <%= @pattern.item_category %></p>
           <p><strong>Difficulty Level:</strong> <span class="badge text-bg-secondary text-lg"><%= @pattern.level.humanize %></span></p>
         </div>
@@ -67,6 +68,7 @@
             <th>Yarn</th>
             <th>Weight</th>
             <th>Started</th>
+            <th>Total Cost</th>
             <th>Overall Rating</th>
             <th>Actions</th>
           </tr>
@@ -79,6 +81,7 @@
               <td><%= project.yarn_used %></td>
               <td><%= Project.yarn_weights[project.yarn_weight] %></td>
               <td><%= project.start_date&.strftime("%d %b %Y") || "Not set" %></td>
+              <td><%= number_to_currency(project.total_price, unit: "£")%></td>
               <td><%=project.average_review.round(1)%></td>
               <td>
                 <%= link_to "View", pattern_project_path(@pattern, project), class: "btn btn-sm btn-light border" %>

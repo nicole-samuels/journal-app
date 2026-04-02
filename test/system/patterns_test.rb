@@ -43,7 +43,7 @@ class PatternsTest < ApplicationSystemTestCase
     fill_in "Yarn Price in GBP", with: "-2"
     fill_in "Yarn Quantity", with: "-3"
     fill_in "Purchase Link", with: "Not a url"
-    fill_in "Needle Size", with: "8"
+    select "US 8 - 5.0 mm", from: "Needle Size"
     fill_in "Garment Size", with: "S"
     click_on "Create Project"
 

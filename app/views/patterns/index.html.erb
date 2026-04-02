@@ -19,7 +19,7 @@
                 <h5 class="card-title mb-1">Project <%= attempt_number %></h5>
                 <p class="card-text text-muted mb-0">
                   Pattern: <%= project.pattern&.pattern_name || "Unknown Pattern" %> | 
-                  Started: <%= project.start_date.strftime("%B %d") %>
+                  Started: <%= project.start_date&.strftime("%B %d") || "Not Started" %>
                 </p>
               </div>
               
@@ -52,12 +52,13 @@
             class: "form-control" %>
       <% end %>
     </div>
+</div>
 
 <div class="container">
   <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-2">
   <% @patterns.each do |pattern| %>
     <div class="col d-flex align-items-stretch">
-      <div class="card text-center border border-secondary shadow-sm w-100">
+      <div class="card text-center border border-secondary shadow-sm w-100" aria-label="Pattern card for <%= pattern.pattern_name %>">
         <% if pattern.pattern_pdf.attached? && pattern.pattern_pdf.previewable? %>
           <div class="card-img-top p-3">
             <%= image_tag pattern.pattern_pdf.preview(resize_to_fill:[400,300]).processed,
